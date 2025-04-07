@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav aria-label="Breadcrumb">
+            <ul class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Category</a></li>
+                <li>Product 1</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="product-detail">
+        <img src="images/product1-large.jpg" alt="Product 1" class="product-image">
+        <h1>Product 1</h1>
+        <p class="description">Detailed product description...</p>
+        <p class="price">$99.99</p>
+        <button class="add-to-cart" data-product="1">Add to Cart</button>
+    </main>
+
+    <aside id="shopping-cart">
+        <h3>Shopping Cart</h3>
+        <ul class="cart-items"></ul>
+        <div class="cart-controls">
+            <input type="number" id="quantity" min="1" value="1">
+            <button id="checkout">Checkout</button>
+        </div>
+    </aside>
+
+    <script src="script.js"></script>
+</body>
+</html>
