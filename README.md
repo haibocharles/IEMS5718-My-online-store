@@ -1,6 +1,7 @@
 # IEMS5718-My-online-store
 ### Project Name: Shopping Cart System with Admin Control Panel
 
+
 ---
 
 ### Project Overview
@@ -156,3 +157,5 @@ project/
 
 6. **Responsive Design**:
    - Uses **Flexbox** for responsive layouts, ensuring a consistent user experience across devices.
+
+
