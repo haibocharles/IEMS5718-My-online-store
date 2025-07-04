@@ -1,0 +1,70 @@
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const db = require('./db'); // 假設 db.js 中已經設置了 MySQL 連接
+
+router.post('/api/login', (req, res) => {
+  const { email, password, isAdmin,panelType} = req.body;
+
+  // 1. 查找用戶 先看email是否存在 後端只需要回傳 JSON 給前端
+  db.query('SELECT * FROM users WHERE email = ? ', [email], async (err, results) => {
+    if (err) {
+      // 處理數據庫錯誤
+     
+      console.error('登錄錯誤:', err);
+      return res.status(500).json({ error: 'Server error, please try again!' });
+    }
+    if (!results || results.length === 0) {
+      return res.status(401).json({ error: 'Invalid Email or password' });
+    }
+
+    const user = results[0];
+
+    // 2. 驗證密碼
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      return res.status(401).json({ error: 'Invalid Email or password' });
+    }
+
+    //3.驗證是否是管理員
+    if (typeof isAdmin !== 'undefined' && String(isAdmin) !== String(user.admin)) {
+    return res.status(403).json({ error: 'Admin flag mismatch' });
+  }
+
+    //4.驗證是否有選擇面板
+    if(typeof panelType === 'undefined' || panelType !== 'category' && panelType !== 'product') {
+      return res.status(400).json({ error: 'Panel type is required' });
+    };
+
+    // 3. 生成JWT令牌 (有效3天)
+    const token = jwt.sign(
+      { userid: user.userid, email: user.email, admin: user.admin },
+      process.env.JWT_SECRET || 'charles_0918',
+      { expiresIn: '3d' }
+    );
+
+    // 4. 設置HTTP-only Cookie
+    res.cookie('authToken', token, {// 注意這裡的 authToken 是你自己定義的 Cookie 名稱
+      httpOnly: true,
+      secure: false, // 在開發環境中可以設置為 false，生產環境建議設置為 true,
+      maxAge: 3 * 24 * 60 * 60 * 1000, // 3天
+      sameSite: 'Strict'
+    });
+
+     // 根據 panelType 回傳不同跳轉頁面
+    let redirect = '/categories-panel';
+    if (panelType === 'product') {
+      redirect = '/products-panel';
+    }
+
+
+    res.json({
+    message: '登錄成功',
+    user: { email: user.email, admin: user.admin },
+    redirect // 這一行很重要！
+    });
+  });
+});
+
+module.exports = router;

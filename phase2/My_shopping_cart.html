@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="phase2.css"><!-- 載入css -->
+    <script src="shopping_cart_script1.js" ></script><!-- 載入js -->
+    <title>購物車</title>
+</head>
+<body>
+    <header>
+        <h1>My Online Store</h1>
+        <nav>
+            <ul class="main-menu"> <!-- 主選單在上面 無序列表 -->
+                <li class="menu-item"><a href="" class="menu-link">Main page</a></li>
+                <li class="menu-item"><a href="" class="menu-link">About us</a></li>
+                <li class="menu-item"><a href="" class="menu-link">Brand Introduction</a></li>
+                <li class="menu-item"><a href="" class="menu-link">News</a></li>
+                <li class="menu-item"><a href="" class="menu-link">Contact us</a></li>
+                <li class="menu-item"><a href="" class="menu-link"><img src="path/to/profile-icon.png" alt="My profile" class="icon"></a></li><!-- 改成圖標 -->
+                <li class="menu-item"><a href="" class="menu-link"><img src="path/to/cart-icon.png" alt="Shopping cart" class="icon" id="shopping-cart-icon"></a></li><!-- 改成圖標 -->
+                <span class="menu-item" id="cart-count"></span><!-- 購物車數量 -->
+            </ul>
+        </nav>
+    </header>
+    <div class="container1">
+        <div class="Product catagory">
+            <p>產品分類</p>
+            <ul class="sub-menu"> <!-- 產品種類選單在左邊 無序列表 -->
+                <!--
+                動態加載-->
+            </ul>
+        </div>
+        <div class="product"> <!-- 產品内容 -->
+            <!--動態加載
+            <!-- 其他產品項目 -->
+        </div>
+    </div>
+     <!--購物車內容  -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>shopping cart</h2>
+            <button id="close-cart" class="close-cart">&times;</button>
+        </div>
+        <div id="cart-content" class="cart-content">
+            <!-- 購物車內容將動態生成 -->
+        </div>
+        <div class="'cart-footer">
+            <button id = checkout-button class="checkout-button">check out</button>
+        </div>
+    </div>
+
+
+    <footer>&copy; Haipo Liu (1155218447) 2025 My Online Store</footer>
+</body>
+</html>

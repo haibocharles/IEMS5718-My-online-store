@@ -1,0 +1,195 @@
+<!DOCTYPE html> +  <!-- 防止XSS 注入和參數亂改 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category Management</title>
+  <link rel="stylesheet" href="Categories_Form.css">
+</head>
+<body>
+  <h1>Category Management</h1>
+
+  <!-- 新增分類 -->
+  <section id="addCategory">
+    <h2>Add New Category</h2>
+    <form id="addCategoryForm" method="POST" action="/api/categories/add">
+      <label for="addCategoryName">Category Name:</label>
+      <input type="text" id="addCategoryName" name="name" required  minlength="2" maxlength="50" pattern="[a-zA-Z0-9\s]+">
+      <br><br>
+      <button type="submit">Add Category</button>
+    </form>
+  </section>
+
+  <hr>
+
+  <!-- 查詢及更新／刪除分類 -->
+  <section id="manageCategory">
+    <h2>Manage Category</h2>
+    <!-- 查詢分類 -->
+    <form id="searchForm" method="GET" action="/api/categories/search">
+      <label for="searchCatName">Category Name:</label>
+     <input type="text" id="searchCatName" name="name" required minlength="2" maxlength="50" pattern="[a-zA-Z0-9\s]+">
+      <button type="button" id="searchBtn">Search</button>
+    </form>
+    <br>
+    <!-- 查詢到後，顯示可更新或刪除的表單 -->
+   <!-- 更新分類 -->
+  <form id="EditForm" class="hidden" method="POST">
+  <!-- 隱藏欄位保留分類ID -->
+  <input type="hidden" id="editCatId" name="catid">
+  <label for="editCatName">Category Name:</label>
+  <input type="text" id="editCatName" name="name" required minlength="2" maxlength="50" pattern="[a-zA-Z0-9\s]+>
+  <br><br>
+  <!-- 更新按鈕 -->
+  <button type="submit" formaction="/api/categories/update">Update Category</button>
+  </form>
+
+  <!-- 刪除分類 -->
+  <form id="DeleteForm" class="hidden" method="POST">
+  <!-- 刪除按鈕 -->
+  <button type="submit" formaction="/api/categories/delete" style="background-color: red; color: white;">Delete Category</button>
+  </form>
+  </section>
+
+  <script>
+    
+
+
+
+
+    // 當用戶點擊「Add Category」按鈕時，使用 JavaScript 向後端請求添加新分類
+   //獲取表單設置事件監聽
+   document.getElementById('addCategoryForm').addEventListener('submit', async function(event) {//定義事件回調函數
+      event.preventDefault();//阻止表單提交
+      const name = document.getElementById('addCategoryName').value;//獲取用戶輸入的分類名稱
+      try {//捕獲錯誤
+        // 使用 fetch 向後端請求添加新分類
+        // 使用 POST 方法，並將分類名稱作為 JSON 格式的請求主體
+        const response = await fetch('http://localhost:3002/api/categories/add', {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': getCSRFToken()
+      },
+      body: JSON.stringify({ name }),
+      });
+        if (!response.ok) {
+          throw new Error('Add category failed');
+        }
+        alert('Category added successfully');
+        // 重置表單
+        document.getElementById('addCategoryForm').reset();
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+
+    /*//獲取CRSF Token
+    function getCSRFToken() {
+    // 从浏览器的Cookie中查找名为csrf_token的值
+    const match = document.cookie.match(/csrf_token=([a-f0-9]+)/);
+    // 如果找到，返回令牌值（十六进制字符串）；否则返回空字符串
+    return match ? match[1] : '';
+  }*/
+
+
+    // 當用戶點擊「Search」按鈕時，使用 JavaScript 向後端請求該分類資料
+    document.getElementById('searchBtn').addEventListener('click', async function() {
+  const name = document.getElementById('searchCatName').value; // 獲取用戶輸入的分類名稱
+  try {
+    const response = await fetch(`http://localhost:3002/api/categories/search?name=${encodeURIComponent(name)}`);
+    if (!response.ok) {
+      throw new Error('Category not found');
+    }
+    const category = await response.json();
+    if (category) {
+      // 填充隱藏表單中的數據，其後可以進行更新或刪除操作
+      document.getElementById('editCatId').value = category.catid;
+      document.getElementById('editCatName').value = category.name;
+      document.getElementById('EditForm').classList.remove('hidden');
+      document.getElementById('DeleteForm').classList.remove('hidden');
+    }
+  } catch (error) {
+    alert(error.message);
+    // 隱藏更新/刪除表單
+    document.getElementById('EditForm').classList.add('hidden');
+    document.getElementById('DeleteForm').classList.add('hidden');
+  }
+});
+
+  // 當用戶點擊「update」按鈕時，使用 JavaScript 向後端請求該分類資料
+  document.getElementById('EditForm').addEventListener('submit', async function(event) {
+  event.preventDefault(); // 阻止表單提交
+  const catid = document.getElementById('editCatId').value; // 獲取分類ID
+  const currentName = document.getElementById('editCatName').value; // 獲取當前分類名稱
+
+  // 彈出對話框讓用戶輸入新的分類名稱
+  const newName = prompt('Enter the new category name:', currentName);
+
+  // 如果用戶取消或未輸入新名稱，則不執行更新
+  if (newName === null || newName.trim() === '') {
+    alert('Update cancelled or invalid input.');
+    return;
+  }
+
+  try {
+    // 使用 fetch 向後端請求更新分類
+    const response = await fetch(`http://localhost:3002/api/categories/update`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ catid, name: newName })
+    });
+
+    if (!response.ok) {
+      throw new Error('Update category failed');
+    }
+
+    alert('Category updated successfully');
+    // 更新表單中的分類名稱
+    document.getElementById('editCatName').value = newName;
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+  // 當用戶點擊「delete」按鈕時，使用 JavaScript 向後端請求刪除該分類
+  document.getElementById('DeleteForm').addEventListener('submit', async function(event) {
+  event.preventDefault(); // 阻止表單提交
+  const name = document.getElementById('editCatName').value; // 獲取分類名稱
+
+  // 確認刪除
+  const isConfirmed = confirm(`Are you sure you want to delete the category "${name}"?`);
+  if (!isConfirmed) {
+    alert('Deletion cancelled.');
+    return;
+  }
+
+  try {
+    // 使用 fetch 向後端請求刪除分類
+    const response = await fetch(`http://localhost:3002/api/categories/delete`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name })
+    });
+
+    if (!response.ok) {
+      throw new Error('Delete category failed');
+    }
+
+    alert('Category deleted successfully');
+    // 隱藏更新/刪除表單
+    document.getElementById('EditForm').classList.add('hidden');
+    document.getElementById('DeleteForm').classList.add('hidden');
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+
+  </script>
+</body>
+</html>

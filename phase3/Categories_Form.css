@@ -1,0 +1,180 @@
+/* 全局樣式 */
+/* 用 .（點）選擇 class 2. 用 #（井字號）選擇 id */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  /* 標題樣式 */
+  h1 {
+    text-align: center;
+    color: #4CAF50;
+    margin-bottom: 40px;
+  }
+  
+
+  .actionBtns {
+      display: flex;
+      gap: 15px;
+      position: absolute;
+      margin-top: 10px;
+      right: 15px;
+      transform: translateY(-50%);
+    }
+    
+  #changePasswordBtn, #logoutBtn {
+      padding: 15px 20px;/* 上下15px，左右15px */
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: center;   /* 主軸的排列 */
+      align-items: center; /*單行排列*/
+      text-align: center;        /* 文字置之於中間 */
+      gap: 8px;
+      white-space: normal; /* 允許文字換行 */
+    }
+
+
+
+  #changePasswordBtn {
+      background-color: #4267B2;
+      color: white;
+    }
+
+  #logoutBtn {
+      background-color: #4267B2;
+      color: white;
+    }
+ 
+  #changePasswordBtn:hover, #logoutBtn:hover {
+      background-color: #d32f2f;
+    }
+
+
+
+
+  .h2 {
+    color: #333;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* 表單樣式 */
+  form {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"], input[type="number"], textarea, input[type="file"], button {
+    font-size: 14px;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 170px);
+  }
+  
+  input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
+  
+  /* 按鈕樣式 */
+  button {
+    font-size: 14px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  button[type="button"] {
+    background-color: #2196F3;
+    color: white;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #0b7dda;
+  }
+  
+  /* 刪除按鈕樣式 */
+  button[formaction="/api/products/delete"] {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  button[formaction="/api/products/delete"]:hover {
+    background-color: #d32f2f;
+  }
+  
+  /* 隱藏表單 */
+  .hidden {
+    display: none;
+  }
+  
+  /* 分隔線樣式 */
+  hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 40px 0;
+  }
+  
+  /* 表單容器樣式 */
+  section {
+    margin-bottom: 40px;
+  }
+  
+  section#addProduct, section#updateProduct, section#searchProduct {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 搜索結果樣式 */
+  #searchResult {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  #searchResult img {
+    max-width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+  }

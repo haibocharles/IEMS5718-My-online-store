@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management</title>
+  <link rel="stylesheet" href="Products_Form.css"> <!-- 載入CSS樣式表 -->
+  <h1>Product Management </h1>
+</head>
+<body>
+   <div class="actionBtns">
+  <button id="logoutBtn">logout</button>
+  <button id="changePasswordBtn">chang password</button>
+  </div>
+  <!-- 新增產品 -->
+  <div class="main-menu">
+  <section id="addProduct">
+    <h2>Add New Product</h2>
+    <form id="addProductForm" method="POST" action="/api/products/add" enctype="multipart/form-data">
+      <label for="addCatId">Category ID:</label>
+      <input type="number" id="addCatId" name="catid" required pattern="\d+" title="Please enter a valid category ID (numbers only)">
+      <br><br>
+      <label for="addName">Product Name:</label>
+      <input type="text" id="addName" name="name" required  title="Please enter a valid product name (letters, numbers, and spaces only)" minlength="2" maxlength="100">
+      <br><br>
+      <label for="addPrice">Price:</label>
+      <input type="number" id="addPrice" name="price" min="0" step="0.01" required pattern="^\d+(\.\d{1,2})?$" title="Please enter a valid price (numbers only, up to two decimal places)">
+      <br><br>
+      <label for="addDescription">Description:</label>
+      <textarea id="addDescription" name="description" required></textarea>
+      <br><br>
+      <label for="addImage">Image:</label>
+      <input type="file" id="addImage" name="image" accept="image/jpeg,image/gif,image/png" required>
+      <br><br>
+      <button type="submit">Add Product</button>
+    </form>
+  </section>
+
+  <hr>
+
+  <!-- 查詢產品 -->
+  <section id="searchProduct">
+    <h2>Search Product</h2>
+    <form id="searchForm" method="GET" action="/api/products/search">
+      <label for="searchPid">Product Name:</label>
+      <input type="text" id="searchname" name="name" required pattern="[a-zA-Z0-9\s]+" title="Please enter a valid product name (letters, numbers, and spaces only)" minlength="2" maxlength="50">
+      <button type="button" id="searchBtn">Search</button>
+    </form>
+    <br>
+    <div id="searchResult" class="hidden">
+      <h3>Product Details</h3>
+      <p><strong>Category ID:</strong> <span id="resultCatId"></span></p>
+      <p><strong>Name:</strong> <span id="resultName"></span></p>
+      <p><strong>Price:</strong> <span id="resultPrice"></span></p>
+      <p><strong>Description:</strong> <span id="resultDescription"></span></p>
+      <p><strong>Image:</strong> <img id="resultImage" src="" alt="Product Image" style="max-width: 200px;"></p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 更新產品 -->
+  <section id="updateProduct">
+    <h2>Update Product</h2>
+    <form id="updateProductForm" method="POST" action="/api/products/update" enctype="multipart/form-data">
+      <label for="updatePid">Product ID:</label>
+      <input type="number" id="updatePid" name="pid" required pattern="\d+" title="Please enter a valid product ID (numbers only)">
+      <br><br>
+
+      <label for="updateCatId">Category ID:</label>
+      <input type="number" id="updateCatId" name="catid" required pattern="\d+" title="Please enter a valid category ID (numbers only)">
+      <br><br>
+
+      <label for="updateName">Product Name:</label>
+      <input type="text" id="updateName" name="name" required title="Please enter a valid product name"> 
+      <br><br>
+
+      <label for="updatePrice">Price:</label>
+      <input type="number" id="updatePrice" name="price" min="0" step="0.01" required pattern="^\d+(\.\d{1,2})?$" title="Please enter a valid price (numbers only, up to two decimal places)">
+      <br><br>
+
+      <label for="updateDescription">Description:</label>
+      <textarea id="updateDescription" name="description" required></textarea>
+      <br><br>
+      <label for="updateImage">New Image (optional):</label>
+      <input type="file" id="updateImage" name="image" accept="image/jpeg,image/gif,image/png">
+      <br><br>
+      <button type="submit">Update Product</button>
+    </form>
+  </section>
+
+  <hr>
+
+  <!-- 刪除產品 -->
+  <section id="deleteProduct">
+    <h2>Delete Product</h2>
+    <form id="deleteProductForm" method="POST" action="/api/products/delete">
+      <label for="deletePid">Category ID:</label>
+      <input type="number" id="deleteCatId" name="catid" required pattern="\d+" title="Please enter a valid category ID (numbers only)">
+      <label for="deletePid">Product ID:</label>
+      <input type="number" id="deletePid" name="pid" required pattern="\d+" title="Please enter a valid product ID (numbers only)">
+      <br><br>
+      <button type="submit" style="background-color: red; color: white;">Delete Product</button>
+    </form>
+
+
+  </section>
+   </div>
+
+  <script>
+      // 當用戶點擊「Add Product」按鈕時，使用 JavaScript 向後端請求添加新產品 
+      document.getElementById('addProductForm').addEventListener('submit', async function(event) 
+      {//定義事件回調函數
+      event.preventDefault();//阻止表單提交
+      const catid = document.getElementById('addCatId').value; // 獲取產品 ID
+       const name = document.getElementById('addName').value; // 獲取產品名稱
+      const price = document.getElementById('addPrice').value; // 獲取價格
+      const description = document.getElementById('addDescription').value; // 獲取描述
+      const image = document.getElementById('addImage').files[0]; // 獲取圖片文件
+      //構建表單數據
+      const formData = new FormData();
+      formData.append('catid', catid); // 添加產品 ID
+      formData.append('name', name); // 添加產品名稱
+      formData.append('price', price); // 添加價格
+      formData.append('description', description); // 添加描述
+      formData.append('image', image); // 添加圖片文件
+      try {
+    // 使用 fetch 向後端請求添加新產品
+    const response = await fetch('https://shoplane2025.click/api/products/add', {
+      method: 'POST',
+      body: formData // 發送表單數據
+    });
+
+    if (!response.ok) {
+      throw new Error('Add Product failed');
+    }
+
+    alert('Product added successfully');
+    // 重置表單
+    document.getElementById('addProductForm').reset();
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+
+ // 當用戶點擊「Search Product」按鈕時，使用 JavaScript 向後端請求該分類資料
+ document.getElementById('searchBtn').addEventListener('click', async function () {
+  const name = document.getElementById('searchname').value; // 獲取用戶輸入的產品名稱
+  console.log('Search name:', name); // 調試輸出
+
+  try {
+    // 發送 GET 請求到後端
+    const response = await fetch(`https://shoplane2025.click/api/products/search?name=${encodeURIComponent(name)}`);
+    if (!response.ok) {
+      throw new Error('Product not found');
+    }
+
+    // 解析 JSON 響應
+    const products = await response.json();
+    console.log('Products:', products); // 調試輸出
+
+    // 清空之前的搜索結果
+    const resultContainer = document.getElementById('searchResult');
+    resultContainer.innerHTML = '';
+
+    // 遍歷所有匹配的產品並顯示
+    products.forEach(product => {
+      const productDiv = document.createElement('div');
+      productDiv.innerHTML = `
+        <p><strong>Category ID:</strong> ${product.catid}</p>
+        <p><strong>Product ID:</strong> ${product.pid}</p>
+        <p><strong>Name:</strong> ${product.name}</p>
+        <p><strong>Price:</strong> ${product.price}</p>
+        <p><strong>Description:</strong> ${product.description}</p>
+        <p><strong>Image:</strong> <img src="${product.image}" alt="Product Image" style="max-width: 200px;"></p>
+        <hr>
+      `;
+      resultContainer.appendChild(productDiv);
+    });
+
+    // 顯示結果區域
+    resultContainer.classList.remove('hidden');
+  } catch (error) {
+    console.error('Error:', error.message); // 調試輸出
+    alert(error.message);
+
+    // 隱藏結果區域
+    document.getElementById('searchResult').classList.add('hidden');
+  }
+});
+
+  // 當用戶點擊「Update Product」按鈕時，使用 JavaScript 向後端請求該分類資料
+  document.getElementById('updateProductForm').addEventListener('submit', async function(event) 
+  {
+  event.preventDefault(); // 阻止表單提交
+
+  // 獲取用戶輸入的產品數據
+  const pid = document.getElementById('updatePid').value; // 獲取產品 ID
+  const catid = document.getElementById('updateCatId').value; // 獲取分類 ID
+  const name = document.getElementById('updateName').value; // 獲取產品名稱
+  const price = document.getElementById('updatePrice').value; // 獲取價格
+  const description = document.getElementById('updateDescription').value; // 獲取描述
+  const image = document.getElementById('updateImage').files[0]; // 獲取圖片文件（可選）
+
+  // 構建表單數據
+  const formData = new FormData();
+  formData.append('pid', pid); // 傳遞產品 ID
+  formData.append('catid', catid); // 傳遞分類 ID
+  formData.append('name', name); // 傳遞產品名稱
+  formData.append('price', price); // 傳遞價格
+  formData.append('description', description); // 傳遞描述
+
+  // 如果有圖片文件，則添加到表單數據中
+  if (image) {
+    formData.append('image', image);
+  }
+
+  try {
+    // 使用 fetch 向後端請求更新產品
+    const response = await fetch('https://shoplane2025.click/api/products/update', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(errorMessage || 'Product update failed');
+    }
+
+    alert('Product updated successfully');
+    // 重置表單
+    document.getElementById('updateProductForm').reset();
+  } catch (error) {
+    alert(`Error: ${error.message}`);
+  }
+});
+
+ // 當用戶點擊「delete Product」按鈕時，使用 JavaScript 向後端請求該分類資料
+ document.getElementById('deleteProductForm').addEventListener('submit', async function(event) 
+ {
+  event.preventDefault(); // 阻止表單提交
+  const catid = document.getElementById('deleteCatId').value; // 獲取分類 ID
+  const pid = document.getElementById('deletePid').value; // 獲取產品 ID
+  // 確認刪除
+  const isConfirmed = confirm(`Are you sure you want to delete the product with Product ID "${pid}" Category ID "${catid}"?`); // 確認刪除
+  if (!isConfirmed) {
+    alert('Deletion cancelled.');
+    return;
+  }
+
+  try{
+    const response =await fetch(`https://shoplane2025.click/api/products/delete`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ catid, pid }) // 傳遞分類 ID 和產品 ID
+    });
+    if (!response.ok) {
+      throw new Error('Delete category failed');
+    }
+    alert('Product deleted successfully');
+    // 重置表單
+    document.getElementById('deletePrductForm').reset();
+
+
+  }
+  catch (error) {
+    alert(error.message);
+  }
+});
+
+
+  //登出
+  document.getElementById('logoutBtn').addEventListener('click', async function() {
+    const isConfirmed = confirm('Are you sure you want to logout?');
+    if (!isConfirmed) {
+      return; // 如果用戶取消登出，則不執行後續操作
+    }
+    try {
+      const response = await fetch('/api/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include' // 確保 cookies 被包含在請求中
+      });
+
+      if (response.ok) {
+        alert('Logout successful!');
+        window.location.href = '/admin-panel-login'; // 登出後跳轉到首頁或登錄頁面
+      } else {
+        throw new Error('Logout failed');
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  });
+
+  //修改密碼
+  document.getElementById('changePasswordBtn').addEventListener('click', function() {
+  window.location.href = '/change_password.html';
+  });
+
+
+
+
+
+
+      
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>
