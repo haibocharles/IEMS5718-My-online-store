@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haipo Bakery - Traditional Taiwanese Pastries</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="phase5.css">
+    <script src="https://www.paypal.com/sdk/js?client-id=AXAGN_DsPH3bicJW8nmuEx5Fg1lOfrzfTIxiZEL_VUgoJJ9nLMRxzw9PvanXbFDHIAJh4RWN7XUZw89S&currency=HKD"></script>
+    <!-- paypal client id -->
+     <script src="shopping_cart_script1.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <h1>Haipo Bakery<span>海柏餅舖</span></h1>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link active" data-page="about">About</a></li>
+                    <li><a href="#" class="nav-link" data-page="question">Common Question</a></li>
+                    <li>
+                        <a href="#" id="shopping-cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count" id="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <!-- Home Page (Shopping Cart) -->
+        <div class="home-page">
+            <div class="main-content">
+                <aside class="category-sidebar">
+                    <h1>Product Categories</h1>
+                 <ul class="sub-menu"></ul>
+             </aside>
+                 <section class="product-list">
+            <!-- 产品项 -->
+                </section>
+            </div>
+        </div>
+  
+
+        <!-- About Us Page -->
+        <div class="about-page">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h2>Heritage in Every Bite</h2>
+                    <p>A century of handcrafted expertise, baking the most delightful Taiwanese pastries</p>
+                </div>
+            </section>
+
+            <!-- About Content -->
+            <div class="container">
+                <div class="section-title">
+                    <h2>About Haipo Bakery</h2>
+                </div>
+
+                <!-- Story Section -->
+                <div class="story-section">
+                    <div class="story-content">
+                        <h3>A Kitchen Legacy in the Alleyways</h3>
+                        <p>The story of Haipo Bakery begins in a small alleyway in Changhua County during the 1960s. Founder Master Ah-Bo, with his passion for traditional pastries and exceptional culinary skills, started making cakes and pastries in his home kitchen. Initially specializing in wedding, funeral, and temple festival cakes, Master Ah-Bo gained a reputation in the neighborhood for using quality ingredients at reasonable prices. Locals would say: "For authentic pastries, go find Master Ah-Bo in the alley!"</p>
+                        
+                        <h3>Inspiration from the Kitchen God</h3>
+                        <p>As times changed, Master Ah-Bo sought to give traditional pastries new life. One Mid-Autumn Festival Eve, while praying to the Kitchen God for inspiration before preparing his baked goods, he stared at the warm fire and golden salted egg yolks before him. A thought struck him: "What if I blend the fragrance of Western cream with the layers of Chinese shortbread, and fill it with this plump salted egg yolk?" After countless attempts, he successfully created two iconic products that would delight taste buds: "Gu Zao Creamy Shortbread" and "Golden Egg Yolk Pastry."</p>
+                        
+                        <div class="product-showcase">
+                            <div class="product-card">
+                                <div class="product-img">
+                                    <img src="uploads/image-1743413287955.jpg" alt="蛋黃酥6入" class="product-photo" />
+                                </div>
+                                <div class="product-info">
+                                    <h4>Gu Zao Creamy Shortbread</h4>
+                                    <p>Made with natural fermented butter instead of traditional lard. The pastry has up to a dozen delicate layers, thin as cicada wings, melting in your mouth to release pure creamy milk aroma and roasted flour fragrance. The filling is a carefully simmered maltose syrup mixed with fine mung bean paste, sweet but not cloying, smooth and mellow.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="product-card">
+                                <div class="product-img">
+                                    <img src="uploads/image-1743427432489.jpg" alt="赤欒綜合" class="product-photo" />
+                                </div>
+                                <div class="product-info">
+                                    <h4>Golden Egg Yolk Pastry</h4>
+                                    <p>Selecting premium red soil-cured salted duck eggs, first roasted with rice wine to remove fishy taste, then wrapped in specially made black bean paste or smooth taro paste. The crust maintains the same emphasis on multi-layer flakiness, golden and alluring. The perfect balance of sweet and salty creates a rich flavor profile, making it a top choice for Mid-Autumn gifts.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p>These two star products quickly captured hearts with their exquisite texture and quality ingredients. The name "Haibo Bakery" spread across Taiwan's pastry industry through these "one crispy, one cake" signature items.</p>
+                        
+                        <h3>Hidden Gem, Beloved by All</h3>
+                        <p>Though Haipo Bakery's main store hides in a small alley beside a temple in a quiet town, without flashy signs, it has built its reputation through word-of-mouth. Loyal customers follow the aroma of fresh butter and baked pastries, or rely on the "food map" passed down by regulars to find this hidden gem. During peak seasons like Mid-Autumn Festival or when new batches emerge, long queues often form outside the store. The owner always apologizes to waiting customers with a smile: "So many people coming, so many people coming. Good things are worth waiting for!" This sincerity and apology only confirm the old saying: "A shop need not be large; with good taste, it will be known."</p>
+                        
+                        <h3>Staying True to Tradition, Embracing Modernity</h3>
+                        <p>From early wedding and funeral cakes to the more refined pastries demanded in the 1960s that gave birth to "Gu Zao Creamy Shortbread" and "Golden Egg Yolk Pastry," Haipo Bakery has evolved with the times. While adapting to modern preferences, we remain committed to our core values. Whether for daily tea snacks, festive gifts, or Mid-Autumn reunions, our elegant packaging and consistent quality always convey the most sincere wishes.</p>
+                        
+                        <h3>Our Promise Never Changes</h3>
+                        <p>Over the years, Haipo Bakery has upheld the philosophy of "integrity, quality, and gratitude." We believe the secret to delicious pastries lies not in fancy packaging, but in precise oven temperature control, uncompromising use of premium ingredients, and the heartfelt warmth passed through every step of traditional craftsmanship.</p>
+                        
+                        <p>Haipo Bakery - Using a century of handcrafting expertise to bake the most delightful Taiwanese pastry flavors. Welcome to visit our alleyway store, follow the aroma of butter and baked pastries, and taste this time-honored delicacy that carries our heartfelt wishes. Let us package this sincere blessing into your gift box to share happiness with loved ones.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- Common Question Content -->
+        <div class="common-question-page">
+            <div class="section-title">
+                <h2>Common Questions</h2>
+            </div>
+
+            <div class="question-section">
+                <!-- 新增英文版FAQ内容 -->
+                <div class="faq-category">
+                    <h3>01. Orders</h3>
+                    
+                    <div class="faq-item">
+                        <h4>How to cancel an order after payment?</h4>
+                        <p>If payment is completed, orders cannot be canceled directly. Please contact our WhatsApp support at +852 1234 5678 for assistance.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>How to correct shipping information after order submission?</h4>
+                        <p>Contact us via WhatsApp at +852 1234 5678. Note changes cannot be made after shipment dispatch.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-category">
+                    <h3>02. Payments</h3>
+                    
+                    <div class="faq-item">
+                        <h4>Online credit card payment methods</h4>
+                        <ul>
+                            <li>If checkout shows "Transaction Failed": Please place a new order</li>
+                            <li>If checkout fails but you receive "Payment Successful" SMS: Contact WhatsApp support immediately</li>
+                        </ul>
+                        <p>Supported cards: Visa/Master card/Jcb</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>How to pay via ATM transfer?</h4>
+                        <ul>
+                            <li>Orders under $10,000: Use one-time virtual account</li>
+                            <li>Orders over $10,000: Bank transfer only, verify last 5 digits via WhatsApp after transfer</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-category">
+                    <h3>03. Shipping</h3>
+                    
+                    <div class="faq-item">
+                        <h4>Free shipping thresholds</h4>
+                        <p><strong>Hong Kong Island</strong></p>
+                        <table>
+                            <tr>
+                                <th>Order Amount</th>
+                                <th>Fee</th>
+                            </tr>
+                            <tr>
+                                <td>Below $3000</td>
+                                <td>$80</td>
+                            </tr>
+                            <tr>
+                                <td>$3000+</td>
+                                <td>FREE</td>
+                            </tr>
+                        </table>
+                        
+                        <p><strong>Outlying Islands</strong></p>
+                        <table>
+                            <tr>
+                                <th>Order Amount</th>
+                                <th>Fee</th>
+                            </tr>
+                            <tr>
+                                <td>Below $3000 (inclusive)</td>
+                                <td>$120</td>
+                            </tr>
+                            <tr>
+                                <td>$3001-$6000</td>
+                                <td>$240</td>
+                            </tr>
+                            <tr>
+                                <td>$6001+</td>
+                                <td>$360</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Convenience store pickup service</h4>
+                        <p>Available for orders under $1000 ($40 fee). Supported stores: 7-11, OK Convenience.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Cash on delivery (COD)</h4>
+                        <p>Available for orders under $3000 ($30 handling fee applies).</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Delivery timeline after payment</h4>
+                        <p>Shipment date can be specified during checkout. Delivery time depends on logistics provider.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-category">
+                    <h3>04. Invoices</h3>
+                    
+                    <div class="faq-item">
+                        <h4>Incorrect or missing tax ID on invoice</h4>
+                        <p>Return original invoice within 7 days and contact WhatsApp support with correct tax ID and return address.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Specifying invoice mailing address</h4>
+                        <p>Add preferred address in order notes during checkout.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Multiple invoices per order</h4>
+                        <p>Generally one invoice per order. For special requests, note in order comments or contact WhatsApp support.</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <p><strong>※ Customer Service Hours</strong><br>
+                    Mon-Fri 10:00-18:00 (Excluding public holidays)</p>
+                    
+                    <p><strong>※ WhatsApp Support</strong><br>
+                    <a href="https://wa.me/85212345678">+852 1234 5678</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+                    
+                  
+
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Shopping Cart</h2>
+            <button id="close-cart" class="close-cart">&times;</button>
+        </div>
+        <form id="paypal-cart-form" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+            <input type="hidden" name="cmd" value="_cart">
+            <input type="hidden" name="upload" value="1">
+            <input type="hidden" name="business" value="sb-wwyf4344501755@business.example.com">
+            <input type="hidden" name="charset" value="utf-8">
+            <input type="hidden" name="currency_code" value="HKD">
+            <!-- 动态插入 item_name_X, item_number_X, quantity_X by JS -->
+            <input type="hidden" name="invoice" id="paypal-invoice">
+            <input type="hidden" name="custom" id="paypal-custom">
+            <div id="cart-content" class="cart-content">
+                <!-- Cart content dynamically generated by JS -->
+            </div>
+            <div class="cart-footer">
+                <div id="paypal-button-container"></div>
+                <p id="result-message"></p>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Haipo Bakery</h3>
+                <p>Using a century of handcrafting expertise to bake the most delightful Taiwanese pastry flavors</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-line"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class ="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i>15 Cheng Huang Miao Kou Lane, Changhua City, Changhua County</p>
+                    <p><i class="fas fa-phone"></i>(04) 1234-1234</p>
+                    <p><i class="fas fa-envelope"></i>haipo_bakery@gmail.com</p>
+                    <p><i class="fas fa-clock"></i>Daily 09:00 - 20:00</p>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Product Series</h3>
+                <p>Butter Shortbread</p>
+                <p>Golden Egg Yolk Pastry</p>
+                <p>Cheesecakey</p>
+                <p>Cookies</p>
+                <p>Festival Gift Box</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>Copyright &copy; 2025 Haipo Bakery. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
