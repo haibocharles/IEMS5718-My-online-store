@@ -72,7 +72,7 @@ node server.js
 
 ### 5. 啟動前端
 
-直接以瀏覽器開啟 `phase5` 目錄下的 HTML 檔案（如 `index.html`），或將整個 `phase5` 目錄部署至 Nginx/Apache 靜態伺服器。
+直接以瀏覽器開啟 `phase5` 目錄下的 HTML 檔案，或將整個 `phase5` 目錄部署至 Nginx/Apache 靜態伺服器。
 
 ### 6. 雲端部署
 
