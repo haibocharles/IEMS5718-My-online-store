@@ -72,7 +72,7 @@ node server.js
 
 ### 5. Launch the Frontend
 
-Open the HTML files in the `phase5` directory (e.g., `index.html`) directly in a browser, or deploy the entire `phase5` directory to an Nginx/Apache static server.
+Open the HTML files in the `phase5` directly in a browser, or deploy the entire `phase5` directory to an Nginx/Apache static server.
 
 ### 6. Cloud Deployment
 
